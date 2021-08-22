@@ -18,7 +18,7 @@ pckg_path=`python extras/find_loc_using_pip.py jupyter_contrib_nbextensions`
 pckg_path=$pckg_path'nbextensions/'
 echo $pckg_path
 # Copy the 'setup' extension folder in the nbextensions path
-sudo cp -R extras/setup/ $pckg_path
+cp -R extras/setup/ $pckg_path
 jupyter contrib nbextension install --user
 # Enabling different extensions for jupyter notebook
 jupyter nbextension enable codefolding/main

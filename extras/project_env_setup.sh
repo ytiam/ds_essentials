@@ -1,8 +1,8 @@
 project=$1
-sudo apt-get install libpq-dev
-sudo apt-get install gcc
-sudo apt-get install python3-dev
-sudo apt-get install awscli
+apt-get install libpq-dev
+apt-get install gcc
+apt-get install python3-dev
+apt-get install awscli
 
 mkdir ~/Ayata
 mkdir ~/Ayata/$project
@@ -33,9 +33,9 @@ pip install Flask-AppBuilder==2.3.2
 
 export AIRFLOW_HOME=~/Ayata/$project/$created_repo/airflow/
 airflow initdb
-python ~/GIT/ds_essentials/extras/change_airflow_config_rbac.py
-bash ~/GIT/ds_essentials/extras/create_rbac_admin_user.sh
-cp ~/GIT/ds_essentials/extras/start_airflow_dev .
+python /GIT/ds_essentials/extras/change_airflow_config_rbac.py
+bash /GIT/ds_essentials/extras/create_rbac_admin_user.sh
+cp /GIT/ds_essentials/extras/start_airflow_dev .
 
 mkdir src/models/config
 cd
