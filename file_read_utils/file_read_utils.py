@@ -30,3 +30,20 @@ def read_multijson_in_newline_format(m: str) -> list():
             k, v = k.rstrip('"'), v.rstrip('"')
             new_dict[k]=v
     return all_dicts
+
+
+def read_image(img_path: str, resize_dim: (int,int) = None):
+    '''
+    Read Image from a given path and resize the image height and width if required
+    
+    Arguments:
+    img_path - Image file path
+    resize_dim - Default is None. If not None, the Image will be resized to (w1,h1) size
+    
+    Output:
+    Image file original/resized
+    '''
+    image_data = Image.open(img_path)
+    if resize_dim:
+        image_data = image_data.resize(resize_dim)
+    return image_data
