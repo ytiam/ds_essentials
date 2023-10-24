@@ -39,7 +39,10 @@ class NeuralNetBasic:
         random_state - random_state for the train-test split
         test_size - test set split percentage
         batch_size - training-validation batch size
+        optimizer - An optimizer of torch.optim class. Like, Adam, SGD etc
+        criterion - A loss criteria of torch.nn class. lile, BCEloss, CrossEntropy etc  
         '''
+        
         if criterion is None:
             raise ValueError("Please set a valid torch.nn.LOSS for criterion")
         
@@ -153,8 +156,6 @@ class NeuralNetBasic:
 
         Args:
         epoch_ - model training epochs
-        optimizer - An optimizer of torch.optim class. Like, Adam, SGD etc
-        criterion - A loss criteria of torch.nn class. lile, BCEloss, CrossEntropy etc 
 
         Out:
         Returns the trained model
