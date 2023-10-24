@@ -133,7 +133,7 @@ class NeuralNetBasic:
         if self.arch is None:
             self.model = self.conv_net(in_channel=self.X_train.shape[1], out_shape=self.y_train.shape[1])
         else:
-            print("From Outside")
+            print("New Architecture assigned...")
             self.model = self.arch(in_channel=self.X_train.shape[1], out_shape=self.y_train.shape[1])
             
         # optimizer and the loss function definition 
