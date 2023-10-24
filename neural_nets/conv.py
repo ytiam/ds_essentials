@@ -22,7 +22,7 @@ gc.collect()
 
 # Generic Class for pytorch align framework to train a neural net with few basic operational modules like fit, predict, calculate_accuracy etc.
 
-class ConvNet_basic:
+class NeuralNetBasic:
     
     def __init__(self, arch = None, X = None, y = None, lr = 0.001, weight_decay=0.00001, 
                  random_state: int = 32, test_size: float = 0.1, batch_size: int = 2):
