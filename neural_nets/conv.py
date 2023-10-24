@@ -25,7 +25,8 @@ gc.collect()
 class NeuralNetBasic:
     
     def __init__(self, arch = None, X = None, y = None, lr = 0.001, weight_decay=0.00001, 
-                 random_state: int = 32, test_size: float = 0.1, batch_size: int = 2):
+                 random_state: int = 32, test_size: float = 0.1, batch_size: int = 2,
+                 optimizer = "adam", criterion = None):
         '''
         Initialize parameters
 
@@ -39,6 +40,9 @@ class NeuralNetBasic:
         test_size - test set split percentage
         batch_size - training-validation batch size
         '''
+        if criterion is None:
+            raise ValueError("Please set a valid torch.nn.LOSS for criterion")
+        
         self.arch = arch
         self.X = X
         self.y = y
@@ -47,7 +51,13 @@ class NeuralNetBasic:
         self.random_state = random_state
         self.test_size = test_size
         self.batch_size = batch_size
-    
+
+        torch.cuda.empty_cache()
+        gc.collect()
+        
+        self.train_val_split()
+        self.initiate_data_loaders()
+        self.initialize_model(optimizer = optimizer, criterion = criterion)
 
     class conv_net(nn.Module):
         def __init__(self, in_channel: int, out_shape: int):
@@ -137,7 +147,7 @@ class NeuralNetBasic:
         self.criterion.to(self.device)
         
         
-    def fit(self, epoch_ = 10, optimizer: str = "adam", criterion = None):
+    def fit(self, epoch_ = 10):
         '''
         Function to Fit the data to the model
 
@@ -149,13 +159,6 @@ class NeuralNetBasic:
         Out:
         Returns the trained model
         '''
-        
-        if criterion is None:
-            raise ValueError("Please set a valid torch.nn.LOSS for criterion")
-        
-        self.train_val_split()
-        self.initiate_data_loaders()
-        self.initialize_model(optimizer = optimizer, criterion = criterion)
         
         min_valid_loss = np.inf
         for epoch in range(epoch_):
